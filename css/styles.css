@@ -1,0 +1,587 @@
+/* 
+    EXAMEN SEGUNDO PARCIAL - DESARROLLO WEB I
+    Estudiante: Marlon Alvaro y Henry Ugsha
+    Curso: Segundo Nivel
+
+    INSTRUCCIONES: Implementar aquí TODO el CSS.
+    No modificar la estructura HTML ni los nombres de las clases.
+
+    1. Estilos generales, tipografía y contenedor
+    2. Header y navegación (Flexbox)
+    3. Portada principal (Flexbox)
+    4. Catalogo de 6 vehículos (CSS Grid)
+    5. Tarjetas, botones, hover y sombras
+    6. Nosotros y beneficios (Grid / Flexbox)
+    7. Formulario y estados :focus
+    8. Footer
+    9. Media queries: tablet <= 900px; móvil <= 600px
+ */
+
+/* 
+    1. Estilos generales, tipografía y contenedor
+ */
+:root {
+  /* Definición de variables globales de colores y estilos reutilizables */
+  --color-principal: #0d9488;
+  --color-principal-oscuro: #0f766e;
+  --color-oscuro: #1e293b;
+  --color-fondo: #f8fafc;
+  --color-blanco: #ffffff;
+  --borde-radio: 8px;
+}
+
+/* Selector universal para normalizar márgenes, rellenos y modelo de caja */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Tipografía base y colores generales del cuerpo de la página */
+  font-family: Arial, sans-serif;
+  color: #334155;
+  background-color: var(--color-blanco);
+  line-height: 1.6;
+}
+
+a {
+  /* Elimina el subrayado por defecto de los enlaces y hereda el color */
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  /* Hace que las imágenes sean responsivas ajustándose a su contenedor */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.contenedor {
+  /* Contenedor centralizado con un ancho máximo predefinido */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.seccion {
+  /* Espaciado vertical estándar para todas las secciones */
+  padding: 50px 0;
+}
+
+.seccion-encabezado {
+  /* Alineación centrada para los títulos principales de cada sección */
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.etiqueta {
+  /* Estilo de insignia o badge pequeño superior */
+  display: inline-block;
+  background-color: #ccfbf1;
+  color: var(--color-principal);
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+/* 2. Header y navegación (Flexbox) */
+.encabezado {
+  /* Encabezado fijo en la parte superior al hacer scroll */
+  background-color: var(--color-oscuro);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.encabezado-contenido {
+  /* Distribuye el logo y el menú de navegación a los extremos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.marca img {
+  /* Hace que la imagen del logo sea circular */
+  border-radius: 50%;
+}
+
+.menu {
+  /* Organiza los elementos del menú de forma horizontal con espacio entre ellos */
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.menu a {
+  /* Estilo de los enlaces del menú principal */
+  color: var(--color-blanco);
+  font-weight: 500;
+}
+
+.menu a:hover {
+  /* Efecto visual al pasar el cursor sobre los enlaces del menú */
+  color: var(--color-principal);
+}
+
+
+/* 3. Portada principal (Flexbox) */
+.hero {
+  /* Sección principal de bienvenida (Hero section) */
+  background-color: var(--color-oscuro);
+  color: var(--color-blanco);
+  padding: 60px 0;
+}
+
+.hero-contenido {
+  /* Distribuye texto e imagen en dos columnas flexibles que se adaptan */
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-texto {
+  /* Ocupa el espacio flexible del texto en la portada */
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-texto h1 {
+  /* Tamaño y color del título principal de bienvenida */
+  font-size: 38px;
+  margin: 10px 0;
+  color: var(--color-blanco);
+}
+
+.hero-texto p {
+  /* Color y separación del párrafo descriptivo de la portada */
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.hero-acciones {
+  /* Contenedor flexible para los botones de acción principal */
+  display: flex;
+  gap: 15px;
+}
+
+.hero-imagen {
+  /* Contenedor flexible para la imagen principal */
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-imagen img {
+  /* Aplica bordes redondeados a la imagen del hero */
+  border-radius: var(--borde-radio);
+}
+
+
+/* 4. Catalogo de 6 vehículos (CSS Grid) */
+
+.vehiculos-grid {
+  /* Cuadrícula adaptable para mostrar las tarjetas de vehículos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+
+/* 5. Tarjetas, botones, hover y sombras */
+
+.vehiculo-card {
+  /* Estilo base de la tarjeta de vehículo con bordes, sombras y transiciones */
+  background-color: var(--color-blanco);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--borde-radio);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vehiculo-card:hover {
+  /* Efecto de elevación y sombra más pronunciada al pasar el cursor */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.vehiculo-card img {
+  /* Asegura que la imagen de la tarjeta cubra el espacio uniformemente */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.vehiculo-info {
+  /* Espaciado interno para la información del vehículo */
+  padding: 20px;
+}
+
+.vehiculo-anio {
+  /* Etiqueta pequeña para el año del vehículo */
+  font-size: 12px;
+  background-color: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #64748b;
+}
+
+.vehiculo-info h3 {
+  /* Título del modelo de vehículo dentro de la tarjeta */
+  margin: 8px 0 5px 0;
+  color: var(--color-oscuro);
+}
+
+.vehiculo-precio {
+  /* Estilo destacado para el precio del vehículo */
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-principal);
+  margin-bottom: 12px;
+}
+
+.vehiculo-detalles {
+  /* Lista horizontal con los detalles técnicos del vehículo */
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 15px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 10px;
+}
+
+/* Estilos de botones generales */
+.boton {
+  /* Estilo base común para todos los botones */
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--borde-radio);
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.boton-principal {
+  /* Botón con el color principal de la marca */
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+
+.boton-principal:hover {
+  /* Cambio de color al pasar el cursor sobre el botón principal */
+  background-color: var(--color-principal-oscuro);
+}
+
+.boton-secundario {
+  /* Botón secundario con tono oscuro y ancho completo */
+  background-color: var(--color-oscuro);
+  color: var(--color-blanco);
+  width: 100%;
+}
+
+.boton-secundario:hover {
+  /* Cambio de tono al pasar el cursor sobre el botón secundario */
+  background-color: #334155;
+}
+
+.boton-claro {
+  /* Botón transparente con bordes blancos para fondos oscuros */
+  background-color: transparent;
+  color: var(--color-blanco);
+  border: 2px solid var(--color-blanco);
+}
+
+.boton-claro:hover {
+  /* Efecto translúcido al pasar el cursor sobre el botón claro */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* 6. Nosotros y beneficios (Grid / Flexbox) */
+
+.nosotros {
+  /* Fondo diferenciador para la sección de información institucional */
+  background-color: var(--color-fondo);
+}
+
+.nosotros-grid {
+  /* Distribución flexible entre texto institucional y cuadrícula de beneficios */
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nosotros-texto {
+  /* Sección de texto descriptivo de la empresa */
+  flex: 1;
+  min-width: 280px;
+}
+
+.nosotros-texto h2 {
+  /* Tamaño y color del título en la sección Nosotros */
+  font-size: 28px;
+  margin: 10px 0 15px 0;
+  color: var(--color-oscuro);
+}
+
+.beneficios-grid {
+  /* Cuadrícula interna para alojar las tarjetas de beneficios */
+  flex: 1.2;
+  min-width: 280px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.beneficio {
+  /* Tarjeta individual de cada beneficio */
+  background-color: var(--color-blanco);
+  padding: 20px;
+  border-radius: var(--borde-radio);
+  border: 1px solid #e2e8f0;
+}
+
+.beneficio-icono {
+  /* Contenedor circular para los iconos o números de los beneficios */
+  display: inline-block;
+  background-color: #ccfbf1;
+  color: var(--color-principal);
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.beneficio h3 {
+  /* Título de cada beneficio */
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: var(--color-oscuro);
+}
+
+.beneficio p {
+  /* Descripción de cada beneficio */
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* 7. Formulario y estados :focus */
+.contacto {
+  /* Sección de contacto con fondo continuo a la sección anterior */
+  background-color: var(--color-fondo);
+  padding-top: 0;
+}
+
+.contacto-grid {
+  /* Distribución en dos columnas para el texto de contacto y el formulario */
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contacto-texto {
+  /* Bloque de texto explicativo en la sección de contacto */
+  flex: 1;
+  min-width: 280px;
+}
+
+.contacto-texto h2 {
+  /* Título de la sección de contacto */
+  font-size: 28px;
+  margin: 10px 0 15px 0;
+  color: var(--color-oscuro);
+}
+
+.contacto-texto p {
+  /* Párrafos descriptivos de contacto */
+  margin-bottom: 10px;
+  color: #475569;
+}
+
+.formulario {
+  /* Estilo contenedor del formulario de contacto con bordes y sombras */
+  flex: 1.2;
+  min-width: 280px;
+  background-color: var(--color-blanco);
+  padding: 30px;
+  border-radius: var(--borde-radio);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-fila {
+  /* Fila flexible para alinear campos de formulario lado a lado */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.formulario-fila .campo {
+  /* Hace que los campos dentro de una fila compartan espacio equitativamente */
+  flex: 1;
+}
+
+.campo {
+  /* Espaciado y orden en columna para los campos individuales del formulario */
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  /* Estilo de las etiquetas de los campos del formulario */
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--color-oscuro);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  /* Estilos generales para inputs, selectores y áreas de texto */
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+/* Estado :focus pedido en el examen (resalta el campo activo con borde y sombra sutil) */
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--color-principal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+.aceptacion {
+  /* Alineación para la casilla de verificación de términos y condiciones */
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.boton-enviar {
+  /* Hace que el botón de envío ocupe todo el ancho disponible */
+  width: 100%;
+}
+
+/* 8. Footer */
+.pie-pagina {
+  /* Estilo general del pie de página */
+  background-color: var(--color-oscuro);
+  color: #94a3b8;
+  padding: 40px 0 20px 0;
+}
+
+.pie-grid {
+  /* Cuadrícula flexible para organizar las columnas del pie de página */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.pie-grid h2, 
+.pie-grid h3 {
+  /* Color de los títulos dentro del pie de página */
+  color: var(--color-blanco);
+  margin-bottom: 12px;
+}
+
+.pie-grid ul {
+  /* Elimina los estilos de lista por defecto en el footer */
+  list-style: none;
+}
+
+.pie-grid ul li {
+  /* Separación entre los elementos de las listas del pie de página */
+  margin-bottom: 6px;
+}
+
+.pie-grid a:hover {
+  /* Efecto hover para los enlaces del pie de página */
+  color: var(--color-principal);
+}
+
+.pie-inferior {
+  /* Línea divisoria y texto de derechos de autor al final del footer */
+  border-top: 1px solid #334155;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* 
+    9. Media queries: tablet <= 900px; móvil <= 600px  
+*/
+
+/* Dispositivos Tablet (ancho menor o igual a 900px) */
+@media (max-width: 900px) {
+  /* Cambia la distribución de columnas a filas verticales centradas */
+  .hero-contenido,
+  .nosotros-grid,
+  .contacto-grid {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-acciones {
+    /* Centra los botones de acción principal en tablets */
+    justify-content: center;
+  }
+
+  .encabezado-contenido {
+    /* Apila el logo y la navegación verticalmente en pantallas medianas */
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .menu {
+    /* Ajusta el espacio entre los elementos del menú */
+    gap: 15px;
+  }
+}
+
+/* Dispositivos Móviles (ancho menor o igual a 600px) */
+@media (max-width: 600px) {
+  .menu {
+    /* Organiza los elementos del menú en una lista vertical centrada */
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-texto h1 {
+    /* Reduce el tamaño del título principal para pantallas pequeñas */
+    font-size: 28px;
+  }
+
+  .vehiculos-grid {
+    /* Muestra una sola tarjeta por columna en celulares */
+    grid-template-columns: 1fr;
+  }
+
+  .formulario {
+    /* Reduce el espacio interno del formulario en móviles */
+    padding: 20px;
+  }
+}
